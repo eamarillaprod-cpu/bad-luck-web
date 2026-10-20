@@ -1,0 +1,92 @@
+/* ==========================================================================
+   MÓDULO 1: SISTEMA DE DISEÑO Y TOKENS CSS (variables.css)
+   --------------------------------------------------------------------------
+   ¿Qué es ":root"?
+   Representa el elemento raíz del documento (<html>). Todas las variables
+   que declaramos aquí con doble guion (--) estarán disponibles en toda la web
+   usando la función var(--nombre-variable).
+   ========================================================================== */
+
+/* 0. FUENTE PROPIA CREADA EN CALLIGRAPHR (@font-face)
+   Permite cargar un archivo .ttf u .otf propio desde la carpeta `public/fonts/`.
+   `font-display: swap` hace que el texto sea visible de inmediato con la fuente
+   de respaldo mientras termina de cargar tu archivo personalizado. */
+@font-face {
+  font-family: 'BadLuckCustom';
+  src: url('/fonts/badluck.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* 1. MODO OSCURO NATIVO DEL NAVEGADOR
+     Le indica al navegador que toda la página es oscura por defecto,
+     ajustando automáticamente barras de scroll, controles e inputs nativos. */
+  color-scheme: dark;
+
+  /* 2. PALETA DE COLORES: MONOCROMÁTICO STREETWEAR (BAD LUCK) */
+  --color-bg: #0a0a0c;              /* Negro Carbón profundo (Fondo principal) */
+  --color-surface: #141418;         /* Gris Asfalto (Tarjetas y secciones elevadas) */
+  --color-surface-hover: #1d1d24;   /* Estado al pasar el mouse sobre tarjetas */
+  --color-border: #26262e;          /* Bordes sutiles tipo industrial */
+  --color-border-strong: #3f3f4a;   /* Bordes resaltados */
+
+  /* Identidad y Acento Principal solicitado: #DCDDD0 (Blanco Piedra/Hueso) */
+  --color-accent: #dcddd0;          /* Acento principal BAD LUCK */
+  --color-accent-pure: #ffffff;     /* Blanco puro para máximo contraste en hover */
+  --color-accent-muted: rgba(220, 221, 208, 0.12); /* Fondo translúcido de acento */
+
+  /* Colores de Texto */
+  --color-text: #dcddd0;            /* Texto principal cálido y legible */
+  --color-text-bright: #ffffff;     /* Títulos destacados */
+  --color-text-muted: #8e8e96;      /* Descripciones y textos secundarios */
+  --color-text-inverse: #0a0a0c;    /* Texto oscuro sobre botones claros (#DCDDD0) */
+
+  /* Estados Semánticos (Notificaciones / WhatsApp) */
+  --color-whatsapp: #25d366;
+  --color-danger: #ef4444;
+
+  /* 3. TIPOGRAFÍA
+     - Display: Tu fuente de Calligraphr ('BadLuckCustom') con Bebas Neue como respaldo
+     - Sans: Space Grotesk (geométrica y legible para descripciones/formularios) */
+  --font-display: 'BadLuckCustom', 'Bebas Neue', Impact, sans-serif;
+  --font-sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+
+  /* Escala Tipográfica Fluida con clamp(mínimo, ideal, máximo)
+     ¡No necesitas escribir decenas de @media queries! El texto crece suavemente
+     según el ancho de la pantalla (vw = viewport width). */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.85rem);
+  --text-sm: clamp(0.875rem, 0.82rem + 0.25vw, 0.975rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg: clamp(1.2rem, 1.1rem + 0.5vw, 1.45rem);
+  --text-xl: clamp(1.5rem, 1.3rem + 1vw, 2.25rem);
+  --text-2xl: clamp(2.25rem, 1.8rem + 2.2vw, 3.75rem);
+  --text-hero: clamp(3.5rem, 2.5rem + 5vw, 7rem);
+
+  /* 4. ESPACIADOS Y LAYOUT */
+  --space-2xs: 0.25rem;  /* 4px */
+  --space-xs: 0.5rem;    /* 8px */
+  --space-sm: 0.75rem;   /* 12px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2.5rem;    /* 40px */
+  --space-2xl: 4rem;     /* 64px */
+  --space-3xl: 6rem;     /* 96px */
+
+  --container-max: 1240px;
+  --header-height: 76px;
+
+  /* 5. BORDES, SOMBRAS Y TRANSICIONES */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-pill: 9999px;
+
+  --shadow-card: 0 12px 32px -8px rgba(0, 0, 0, 0.65);
+  --shadow-glow: 0 0 25px rgba(220, 221, 208, 0.18);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 180ms var(--ease-out-expo);
+  --transition-normal: 320ms var(--ease-out-expo);
+}

@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="BAD LUCK (@badluckpy) — Tienda de remeras y buzos personalizados en Paraguay. Diseños de bandas, conciertos, eventos y tus propias ideas en tela."
+    />
+    <meta name="theme-color" content="#0b0b0f" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_PY" />
+    <meta property="og:title" content="BAD LUCK | Remeras &amp; Buzos Personalizados" />
+    <meta
+      property="og:description"
+      content="Tienda de remeras y buzos personalizados en Paraguay. Diseños de bandas, conciertos, eventos y tus propias ideas en tela."
+    />
+    <meta property="og:image" content="/images/cat-logo-1.png" />
+    <title>BAD LUCK | Remeras & Buzos Personalizados</title>
+
+    <!-- Ícono de la pestaña del navegador (Favicon) -->
+    <link rel="icon" type="image/png" href="/images/navbar-cat.png" />
+
+    <!-- Precarga de la fuente propia creada en Calligraphr para evitar parpadeos -->
+    <link
+      rel="preload"
+      href="/fonts/badluck.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+
+    <!-- Preconexión a Google Fonts para acelerar la carga de fuentes de respaldo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link visually-hidden">
+      Saltar al contenido principal
+    </a>
+
+    <!-- ====================================================================
+         1. BARRA DE NAVEGACIÓN FIJA (Sticky Header + Glassmorphism)
+         ==================================================================== -->
+    <header class="site-header">
+      <nav class="container navbar" aria-label="Principal">
+        <a href="#" class="brand-logo">
+          <img
+            src="/images/navbar-cat.png"
+            alt="Logo gato Bad Luck"
+            class="brand-logo__icon"
+            width="38"
+            height="38"
+            decoding="async"
+          />
+          <span>BAD LUCK</span>
+          <span class="brand-logo__tag">PY</span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#catalogo">Catálogo</a></li>
+          <li><a href="#personalizar">Tu Idea en Tela</a></li>
+          <li><a href="#proceso">Cómo Trabajamos</a></li>
+          <li>
+            <a
+              href="https://www.instagram.com/badluckpy/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @badluckpy ↗
+            </a>
+          </li>
+        </ul>
+
+        <button
+          type="button"
+          class="cart-trigger"
+          id="open-cart-btn"
+          aria-label="Abrir carrito de compras"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span>Carrito</span>
+          <span class="cart-count" id="cart-count">0</span>
+        </button>
+      </nav>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <!-- ==================================================================
+           2. PORTADA PRINCIPAL (HERO SECTION — Logo + BAD LUCK & Escenario Rock)
+           ================================================================== -->
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="container hero-canvas">
+          <!-- Izquierda: Gato (Logo 6 sin cuchillo -> Logo 1 con cuchillo al encenderse BAD) -->
+          <div class="hero-cat-stage" aria-hidden="true">
+            <div class="hero-cat-swap">
+              <img
+                src="/images/cat-logo-6.png"
+                alt=""
+                class="hero-cat-img hero-cat-img--6"
+                width="1219"
+                height="1235"
+                fetchpriority="high"
+                decoding="async"
+              />
+              <img
+                src="/images/cat-logo-1.png"
+                alt=""
+                class="hero-cat-img hero-cat-img--1"
+                width="1219"
+                height="1235"
+                decoding="async"
+              />
+            </div>
+          </div>
+
+          <!-- Derecha: Bloque tipográfico BAD LUCK + Subtítulo justificado al ancho -->
+          <div class="hero-brand-stage">
+            <div class="hero-type-block">
+              <h1 id="hero-heading" class="hero-stacked-title" aria-label="BAD LUCK">
+                <span class="hero-word hero-word--bad" aria-hidden="true">
+                  <span>B</span><span>A</span><span>D</span>
+                </span>
+                <span class="hero-word hero-word--luck" aria-hidden="true">LUCK</span>
+              </h1>
+
+              <p class="hero-subtitle" aria-label="Rockwear &amp; Lifestyle">
+                <span aria-hidden="true">R</span><span aria-hidden="true">o</span><span aria-hidden="true">c</span><span aria-hidden="true">k</span><span aria-hidden="true">w</span><span aria-hidden="true">e</span><span aria-hidden="true">a</span><span aria-hidden="true">r</span>
+                <span class="hero-subtitle__space" aria-hidden="true">&amp;</span>
+                <span aria-hidden="true">L</span><span aria-hidden="true">i</span><span aria-hidden="true">f</span><span aria-hidden="true">e</span><span aria-hidden="true">s</span><span aria-hidden="true">t</span><span aria-hidden="true">y</span><span aria-hidden="true">l</span><span aria-hidden="true">e</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           3. CINTA EN MOVIMIENTO INFINITO (MARQUEE CSS)
+           ----------------------------------------------------------------==
+           Nota de accesibilidad: El segundo `.marquee-group` lleva
+           `aria-hidden="true"` para que los lectores de pantalla no lean
+           el mismo texto dos veces. -->
+      <div class="marquee" aria-label="Destacados de BAD LUCK">
+        <div class="marquee-track">
+          <div class="marquee-group">
+            <span>REMERAS PERSONALIZADAS</span>
+            <span class="marquee-dot"></span>
+            <span>MERCH DE BANDAS Y CONCIERTOS</span>
+            <span class="marquee-dot"></span>
+            <span>ACCESORIOS PERSONALIZADOS</span>
+            <span class="marquee-dot"></span>
+            <span>ENTREGAS EN TODO EL PAÍS</span>
+            <span class="marquee-dot"></span>
+            <span>ITAUGUÁ • PARAGUAY</span>
+            <span class="marquee-dot"></span>
+            <span>PEDIDOS POR WHATSAPP</span>
+            <span class="marquee-dot"></span>
+          </div>
+          <!-- Copia exacta para lograr el bucle infinito perfecto -->
+          <div class="marquee-group" aria-hidden="true">
+            <span>REMERAS PERSONALIZADAS</span>
+            <span class="marquee-dot"></span>
+            <span>MERCH DE BANDAS Y CONCIERTOS</span>
+            <span class="marquee-dot"></span>
+            <span>ACCESORIOS PERSONALIZADOS</span>
+            <span class="marquee-dot"></span>
+            <span>ENTREGAS EN TODO EL PAÍS</span>
+            <span class="marquee-dot"></span>
+            <span>ITAUGUÁ • PARAGUAY</span>
+            <span class="marquee-dot"></span>
+            <span>PEDIDOS POR WHATSAPP</span>
+            <span class="marquee-dot"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================================================================
+           4. CATÁLOGO INTERACTIVO DE PRENDAS (Módulo 3)
+           ================================================================== -->
+      <section id="catalogo" class="catalog-section" aria-labelledby="catalog-heading">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-header__title-box">
+              <span class="badge">Drops &amp; Colecciones</span>
+              <h2 id="catalog-heading" class="section-title">
+                CATÁLOGO DE PRENDAS
+              </h2>
+              <p>
+                Elegí el corte (<strong>Clásico</strong> u <strong>Oversize</strong>) y tu talle ideal. Todas las prendas se estampan a pedido en algodón peinado de primera calidad.
+              </p>
+            </div>
+            <img
+              src="/images/cat-personalizar.png"
+              alt=""
+              aria-hidden="true"
+              class="section-title-cat section-title-cat--catalogo"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <!-- Botones de filtro inyectados desde src/modules/catalog.js -->
+          <div
+            id="catalog-filters"
+            class="filter-bar"
+            role="toolbar"
+            aria-label="Filtrar catálogo por categoría"
+          ></div>
+
+          <!-- Grilla de productos inyectada desde src/modules/catalog.js -->
+          <div id="catalog-grid" class="catalog-grid" aria-live="polite"></div>
+
+          <!-- Controles de paginación dinámica (hasta 6 prendas por página) -->
+          <nav
+            id="catalog-pagination"
+            class="catalog-pagination"
+            aria-label="Paginación del catálogo"
+          ></nav>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           5. CONFIGURADOR INTERACTIVO "TU IDEA EN TELA" (Módulo 4 • Mockup IA)
+           ================================================================== -->
+      <section id="personalizar" class="customizer-section" aria-labelledby="customizer-heading">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-header__title-box">
+              <span class="badge">Probador Virtual Interactivo</span>
+              <h2 id="customizer-heading" class="section-title">
+                TU IDEA EN TELA
+              </h2>
+              <p>
+                Subí tu diseño o logo, elegí entre <strong>Remera Clásica</strong> u <strong>Oversize</strong>, probá distintos colores de tela y acomodá el estampado en tiempo real para ver exactamente cómo va a quedar.
+              </p>
+            </div>
+            <img
+              src="/images/cat-catalogo.png"
+              alt=""
+              aria-hidden="true"
+              class="section-title-cat section-title-cat--personalizar"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <div class="customizer-grid">
+            <!-- Columna Izquierda: Controles Interactivos -->
+            <form id="customizer-form" class="customizer-form">
+              <!-- Paso 1: Corte de la Remera (Las 2 imágenes reales) -->
+              <div class="field-group" role="group" aria-label="1. Elegí el corte de la remera">
+                <div class="field-label">
+                  <span>1. Elegí el corte de la remera</span>
+                  <span class="field-hint">Cambia el modelo en vivo</span>
+                </div>
+                <div class="choice-grid">
+                  <label class="choice-card">
+                    <input type="radio" name="garment" value="remera-oversize" checked />
+                    <span class="choice-card__title">Remera Oversize</span>
+                    <span class="choice-card__price">Gs. 90.000</span>
+                  </label>
+                  <label class="choice-card">
+                    <input type="radio" name="garment" value="remera-clasica" />
+                    <span class="choice-card__title">Remera Clásica</span>
+                    <span class="choice-card__price">Gs. 75.000</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Paso 2: Calidad de la Prenda (Básica / Premium / Custom) -->
+              <div class="field-group" id="customizer-quality-fieldset" role="group" aria-label="2. Calidad de la prenda">
+                <div class="field-label">
+                  <span>2. Calidad de la prenda</span>
+                  <span class="field-hint">Gramaje y tacto de tela</span>
+                </div>
+                <div id="custom-quality-options" class="choice-grid">
+                  <!-- Se genera dinámicamente desde store.getSettings().qualities -->
+                </div>
+              </div>
+
+              <!-- Paso 3: Color de la Tela y Talle (Unificados de forma limpia) -->
+              <div class="field-group" role="group" aria-label="3. Color y Talle de la remera">
+                <div class="field-label">
+                  <span>3. Color y Talle de la remera</span>
+                  <span class="field-hint">Seleccioná tu combinación</span>
+                </div>
+
+                <div class="color-size-grid">
+                  <div>
+                    <span class="field-sublabel">Color de tela</span>
+                    <div class="color-options">
+                      <label class="color-pill">
+                        <input type="radio" name="color" value="Negro Carbón" checked />
+                        <span class="color-dot" style="background-color: #18181e;"></span>
+                        <span>Negro Carbón</span>
+                      </label>
+                      <label class="color-pill">
+                        <input type="radio" name="color" value="Blanco Hueso" />
+                        <span class="color-dot" style="background-color: #dcddd0;"></span>
+                        <span>Blanco Hueso</span>
+                      </label>
+                      <label class="color-pill">
+                        <input type="radio" name="color" value="Gris Vintage" />
+                        <span class="color-dot" style="background-color: #5e5e68;"></span>
+                        <span>Gris Vintage</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span class="field-sublabel">Talle</span>
+                    <div class="option-pills customizer-size-pills">
+                      <label class="option-pill">
+                        <input type="radio" name="size" value="S" />
+                        <span>S</span>
+                      </label>
+                      <label class="option-pill">
+                        <input type="radio" name="size" value="M" />
+                        <span>M</span>
+                      </label>
+                      <label class="option-pill">
+                        <input type="radio" name="size" value="L" checked />
+                        <span>L</span>
+                      </label>
+                      <label class="option-pill">
+                        <input type="radio" name="size" value="XL" />
+                        <span>XL</span>
+                      </label>
+                      <label class="option-pill option-pill--xxl" id="custom-size-pill-xxl">
+                        <input type="radio" name="size" value="XXL" />
+                        <span class="size-pill-wrap">
+                          <span class="size-name">XXL</span>
+                          <span id="custom-xxl-price-badge" class="size-extra"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Paso 4: Ubicación del Estampado -->
+              <div class="field-group" role="group" aria-label="4. Ubicación del estampado">
+                <div class="field-label">
+                  <span>4. Ubicación del estampado</span>
+                  <span class="field-hint">Adelante, atrás o ambos</span>
+                </div>
+                <div class="choice-grid">
+                  <label class="choice-card">
+                    <input type="radio" name="zone" value="Solo Frente" checked />
+                    <span class="choice-card__title">Solo Frente</span>
+                    <span class="choice-card__price">Incluido</span>
+                  </label>
+                  <label class="choice-card">
+                    <input type="radio" name="zone" value="Solo Espalda" />
+                    <span class="choice-card__title">Solo Espalda</span>
+                    <span class="choice-card__price">Incluido</span>
+                  </label>
+                  <label class="choice-card">
+                    <input type="radio" name="zone" value="Frente + Espalda" />
+                    <span class="choice-card__title">Frente + Espalda</span>
+                    <span class="choice-card__price">+ Gs. 15.000</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Paso 5: Subir Diseño (Frente y, si aplica, Espalda) + Herramientas IA -->
+              <div class="field-group">
+                <div class="field-label">
+                  <span id="primary-upload-title">5. Subí tu diseño (Frente)</span>
+                  <span class="field-hint">PNG, JPG o WebP</span>
+                </div>
+
+                <label for="custom-design-input" id="design-dropzone" class="design-dropzone">
+                  <input
+                    type="file"
+                    id="custom-design-input"
+                    accept="image/*"
+                    hidden
+                  />
+                  <div class="design-dropzone__content">
+                    <span class="design-dropzone__icon">↑</span>
+                    <div>
+                      <strong id="design-file-label" class="design-dropzone__title">
+                        Hacé clic o arrastrá el diseño de frente acá
+                      </strong>
+                      <span class="design-dropzone__subtitle">
+                        Se estampa al instante sobre la remera para que lo acomodes
+                      </span>
+                    </div>
+                  </div>
+                </label>
+
+                <!-- Diseños de prueba rápida (Frente) -->
+                <div class="preset-designs-bar">
+                  <span class="preset-designs-bar__label">Probar con ejemplo:</span>
+                  <button type="button" class="preset-chip" data-preset="/images/cat-logo-1.png" data-preset-side="front" data-preset-name="Gato Bad Luck (Cuchillo)">
+                    Gato Cuchillo
+                  </button>
+                  <button type="button" class="preset-chip" data-preset="/images/cat-logo-6.png" data-preset-side="front" data-preset-name="Gato Bad Luck">
+                    Gato Clásico
+                  </button>
+                  <button type="button" class="preset-chip" id="clear-design-btn" hidden>
+                    ✕ Quitar diseño
+                  </button>
+                </div>
+
+                <!-- Opción de carga extra para ESPALDA (se habilita al elegir "Frente + Espalda") -->
+                <div id="back-design-upload-block" class="back-design-upload-block" hidden>
+                  <div class="field-label" style="margin-top: var(--space-sm);">
+                    <span>5B. Subí tu diseño de atrás (Espalda)</span>
+                    <span class="field-hint">PNG, JPG o WebP</span>
+                  </div>
+
+                  <label for="custom-design-back-input" id="design-back-dropzone" class="design-dropzone">
+                    <input
+                      type="file"
+                      id="custom-design-back-input"
+                      accept="image/*"
+                      hidden
+                    />
+                    <div class="design-dropzone__content">
+                      <span class="design-dropzone__icon">↑</span>
+                      <div>
+                        <strong id="design-back-file-label" class="design-dropzone__title">
+                          Hacé clic o arrastrá el diseño de espalda acá
+                        </strong>
+                        <span class="design-dropzone__subtitle">
+                          Podés alternar entre Frente y Espalda en la vista previa
+                        </span>
+                      </div>
+                    </div>
+                  </label>
+
+                  <div class="preset-designs-bar">
+                    <span class="preset-designs-bar__label">Probar en espalda:</span>
+                    <button type="button" class="preset-chip" data-preset="/images/cat-logo-1.png" data-preset-side="back" data-preset-name="Gato Bad Luck (Cuchillo)">
+                      Gato Cuchillo
+                    </button>
+                    <button type="button" class="preset-chip" data-preset="/images/cat-logo-6.png" data-preset-side="back" data-preset-name="Gato Bad Luck">
+                      Gato Clásico
+                    </button>
+                    <button type="button" class="preset-chip" id="clear-back-design-btn" hidden>
+                      ✕ Quitar diseño espalda
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Panel de ajuste inteligente del diseño activo (Quitar fondo IA, Tamaño, Centrar) -->
+                <div id="design-ai-tools" class="design-ai-tools" hidden>
+                  <div class="ai-tool-row">
+                    <label class="ai-toggle-label">
+                      <input type="checkbox" id="ai-remove-bg" />
+                      <span class="ai-toggle-switch"></span>
+                      <span id="ai-remove-bg-label">Quitar fondo del diseño automáticamente (IA)</span>
+                    </label>
+                    <button type="button" id="reset-design-pos-btn" class="ai-mini-btn">
+                      Centrar diseño
+                    </button>
+                  </div>
+
+                  <div id="ai-tolerance-row" class="ai-slider-row" hidden>
+                    <label for="ai-bg-tolerance">
+                      <span>Sensibilidad de recorte de fondo</span>
+                      <strong id="ai-tolerance-value">28%</strong>
+                    </label>
+                    <input
+                      type="range"
+                      id="ai-bg-tolerance"
+                      min="5"
+                      max="70"
+                      value="28"
+                    />
+                  </div>
+
+                  <div class="ai-slider-row">
+                    <label for="design-scale-slider">
+                      <span>Tamaño del estampado</span>
+                      <strong id="design-scale-value">100%</strong>
+                    </label>
+                    <input
+                      type="range"
+                      id="design-scale-slider"
+                      min="30"
+                      max="165"
+                      value="100"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Paso 6: Indicaciones adicionales -->
+              <div class="field-group">
+                <label for="custom-notes" class="field-label">
+                  <span>6. Indicaciones adicionales (Opcional)</span>
+                </label>
+                <textarea
+                  id="custom-notes"
+                  name="notes"
+                  class="text-area"
+                  placeholder="Contanos cualquier detalle extra para el taller..."
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">
+                + Agregar Prenda Personalizada al Carrito
+              </button>
+            </form>
+
+            <!-- Columna Derecha: Vista Previa en Vivo (Sticky) -->
+            <aside class="customizer-preview" aria-label="Vista previa interactiva de tu remera">
+              <div class="customizer-preview__header">
+                <span class="badge">Mockup en Tiempo Real</span>
+                <div id="preview-side-switcher" class="preview-side-switcher" hidden>
+                  <button type="button" class="side-switch-btn is-active" data-preview-side="front">
+                    Vista Frente
+                  </button>
+                  <button type="button" class="side-switch-btn" data-preview-side="back">
+                    Vista Espalda
+                  </button>
+                </div>
+                <span id="preview-drag-hint" style="font-size: var(--text-xs); color: var(--color-text-muted);">
+                  Arrastrá el diseño para moverlo
+                </span>
+              </div>
+
+              <div class="preview-stage preview-stage--mockup" id="custom-preview-stage">
+                <span id="custom-preview-zone" class="preview-zone-badge">
+                  Solo Frente
+                </span>
+                <canvas
+                  id="custom-mockup-canvas"
+                  class="custom-mockup-canvas"
+                  width="768"
+                  height="1024"
+                  aria-label="Previsualización interactiva de la remera personalizada"
+                ></canvas>
+              </div>
+
+              <div class="preview-summary">
+                <div class="preview-summary__row">
+                  <span>Prenda base:</span>
+                  <strong id="summary-garment">Remera Oversize</strong>
+                </div>
+                <div class="preview-summary__row">
+                  <span>Color &amp; Talle:</span>
+                  <strong id="summary-specs">Negro Carbón • Talle L</strong>
+                </div>
+                <div class="preview-summary__row">
+                  <span>Diseño / Idea:</span>
+                  <strong id="summary-idea">Sin diseño subido aún</strong>
+                </div>
+              </div>
+
+              <div class="preview-total">
+                <span style="font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted);">
+                  Presupuesto estimado
+                </span>
+                <strong id="custom-total-price" class="preview-total__price">
+                  Gs. 90.000
+                </strong>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           6. SECCIÓN "CÓMO TRABAJAMOS" (Módulo 6 • Scroll Reveal)
+           ================================================================== -->
+      <section id="proceso" class="process-section" aria-labelledby="process-heading">
+        <div class="container">
+          <div class="section-header reveal-on-scroll">
+            <div class="section-header__title-box">
+              <span class="badge">De la Idea a la Prenda</span>
+              <h2 id="process-heading" class="section-title">
+                CÓMO TRABAJAMOS
+              </h2>
+              <p>
+                Hacemos que tener la remera o el buzo exacto que buscás sea rápido, sin vueltas y sin cantidades mínimas.
+              </p>
+            </div>
+            <img
+              src="/images/cat-proceso.png"
+              alt=""
+              aria-hidden="true"
+              class="section-title-cat section-title-cat--proceso"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <div class="steps-grid">
+            <article class="step-card reveal-on-scroll" style="--reveal-delay: 0ms;">
+              <span class="step-number">01</span>
+              <h3 class="step-title">Elegí o Contanos tu Idea</h3>
+              <p>
+                Sumá prendas del catálogo a tu carrito o usá el configurador <strong>Tu Idea en Tela</strong> para indicarnos la banda, concierto, frase o diseño propio que querés.
+              </p>
+            </article>
+
+            <article class="step-card reveal-on-scroll" style="--reveal-delay: 120ms;">
+              <span class="step-number">02</span>
+              <h3 class="step-title">Boceto &amp; Estampado</h3>
+              <p>
+                Al enviar tu pedido al WhatsApp de <strong>BAD LUCK</strong>, coordinamos el diseño/imagen exacta y preparamos tu prenda a medida en algodón peinado premium.
+              </p>
+            </article>
+
+            <article class="step-card reveal-on-scroll" style="--reveal-delay: 240ms;">
+              <span class="step-number">03</span>
+              <h3 class="step-title">Retiro o Envío a Todo PY</h3>
+              <p>
+                Podés pasar a retirar en <strong>Itauguá</strong> o te lo enviamos por delivery (Asunción y Central) o encomienda a cualquier ciudad del Paraguay.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ====================================================================
+         7. PIE DE PÁGINA (FOOTER) & BOTÓN FLOTANTE DE WHATSAPP
+         ==================================================================== -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-cat-col">
+            <img
+              src="/images/footer-cat.png"
+              alt="Gato Bad Luck"
+              class="footer-cat-img"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <div class="footer-col">
+            <a href="#" class="brand-logo">
+              BAD LUCK
+              <span class="brand-logo__tag">PY</span>
+            </a>
+            <p style="font-size: var(--text-xs); margin-top: var(--space-xs);">
+              Tienda de remeras y accesorios personalizados. Tus Bandas favoritas, conceptos, y tus propias ideas estampadas con actitud desde Itauguá para todo el Paraguay.
+            </p>
+          </div>
+
+          <div class="footer-col">
+            <h3>Explorar</h3>
+            <a href="#catalogo">Catálogo de Prendas</a>
+            <a href="#personalizar">Configurador "Tu Idea en Tela"</a>
+            <a href="#proceso">Cómo Trabajamos</a>
+          </div>
+
+          <div class="footer-col">
+            <h3>Contacto Directo</h3>
+            <a
+              href="https://wa.me/595971903651?text=Hola%20BAD%20LUCK!%20Tengo%20una%20consulta%20sobre%20una%20prenda%20personalizada."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp: +595 971 903651 ↗
+            </a>
+            <a
+              href="https://www.instagram.com/badluckpy/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Instagram: @badluckpy ↗
+            </a>
+            <span style="font-size: var(--text-xs); color: var(--color-text-muted);">
+              📍 Itauguá, Paraguay • Envíos a todo el país
+            </span>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span>© 2026 BAD LUCK (@badluckpy). Todos los derechos reservados.</span>
+          <span>Desarrollado por eamarilla - contacto: eamarillaprod@gmail.com</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Botón flotante para consulta directa por WhatsApp -->
+    <a
+      href="https://wa.me/595971903651?text=Hola%20BAD%20LUCK!%20Quiero%20consultar%20por%20una%20remera%20personalizada."
+      target="_blank"
+      rel="noopener noreferrer"
+      class="whatsapp-fab"
+      aria-label="Consultar directamente por WhatsApp"
+    >
+      <span>WhatsApp Directo</span>
+      <span>↗</span>
+    </a>
+
+    <!-- ====================================================================
+         6. CAJÓN LATERAL DEL CARRITO (<dialog> Nativo • Módulo 5)
+         ==================================================================== -->
+    <dialog
+      id="cart-dialog"
+      class="cart-drawer"
+      closedby="any"
+      aria-labelledby="cart-dialog-title"
+    >
+      <div class="cart-drawer__header">
+        <h2 id="cart-dialog-title" class="cart-drawer__title">
+          TU PEDIDO
+        </h2>
+        <button
+          type="button"
+          id="close-cart-btn"
+          class="cart-close-btn"
+          aria-label="Cerrar carrito"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Gato de fondo en el espacio del carrito -->
+      <img
+        src="/images/cart-cat.png"
+        alt=""
+        aria-hidden="true"
+        class="cart-bg-cat"
+        loading="lazy"
+        decoding="async"
+      />
+
+      <!-- Lista dinámica de prendas agregadas -->
+      <div id="cart-items-list" class="cart-drawer__body"></div>
+
+      <!-- Pie del carrito con datos rápidos y botón a WhatsApp -->
+      <div class="cart-drawer__footer">
+        <div class="checkout-fields">
+          <input
+            type="text"
+            id="cart-customer-name"
+            placeholder="Tu nombre o apodo (para el pedido)"
+            aria-label="Tu nombre o apodo"
+          />
+          <select id="cart-delivery-method" aria-label="Método de entrega">
+            <option value="Retiro en Itauguá (a coordinar)">
+              📍 Retiro en Itauguá (a coordinar)
+            </option>
+            <option value="Delivery Asunción y Gran Asunción">
+              🛵 Delivery Asunción y Gran Asunción
+            </option>
+            <option value="Encomienda al interior del país">
+              🚛 Encomienda al interior del país
+            </option>
+          </select>
+        </div>
+
+        <div class="cart-total-row">
+          <span style="font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted);">
+            Total Estimado
+          </span>
+          <strong id="cart-total-amount">Gs. 0</strong>
+        </div>
+
+        <button
+          type="button"
+          id="whatsapp-checkout-btn"
+          class="btn btn-whatsapp"
+        >
+          Enviar Pedido por WhatsApp ↗
+        </button>
+      </div>
+    </dialog>
+
+    <!-- ====================================================================
+         8. DIÁLOGO LIGHTBOX DE IMAGEN EN ALTA RESOLUCIÓN (#image-lightbox-dialog)
+         ==================================================================== -->
+    <dialog
+      id="image-lightbox-dialog"
+      class="lightbox-dialog"
+      closedby="any"
+      aria-labelledby="lightbox-product-title"
+    >
+      <div class="lightbox-dialog__content">
+        <header class="lightbox-dialog__header">
+          <div class="lightbox-dialog__info">
+            <span class="lightbox-dialog__badge" id="lightbox-product-badge">Drop</span>
+            <h2 class="lightbox-dialog__title" id="lightbox-product-title">Prenda</h2>
+          </div>
+          <div class="lightbox-dialog__controls">
+            <span id="lightbox-counter" class="lightbox-counter" aria-live="polite">1 / 1</span>
+            <button
+              type="button"
+              class="lightbox-btn"
+              id="lightbox-zoom-toggle"
+              title="Alternar tamaño original (Zoom)"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span id="lightbox-zoom-text">Zoom 100%</span>
+            </button>
+            <button
+              type="button"
+              class="lightbox-btn lightbox-btn--close"
+              id="lightbox-close-btn"
+              aria-label="Cerrar vista ampliada"
+            >
+              ✕
+            </button>
+          </div>
+        </header>
+
+        <!-- Galería estilo eBay / Amazon: Miniaturas a la izquierda + Visor grande a la derecha -->
+        <div class="lightbox-dialog__body">
+          <aside class="lightbox-thumbs" id="lightbox-thumbs" role="tablist" aria-label="Fotos del producto"></aside>
+
+          <div class="lightbox-dialog__viewer" id="lightbox-viewer">
+            <button
+              type="button"
+              class="lightbox-nav-btn lightbox-nav-btn--prev"
+              id="lightbox-prev-btn"
+              aria-label="Foto anterior"
+              title="Foto anterior (←)"
+            >
+              ‹
+            </button>
+
+            <div class="lightbox-dialog__img-container" id="lightbox-img-container" title="Hacé clic para ampliar o reducir">
+              <img
+                id="lightbox-img"
+                class="lightbox-dialog__img"
+                alt=""
+                hidden
+              />
+            </div>
+
+            <button
+              type="button"
+              class="lightbox-nav-btn lightbox-nav-btn--next"
+              id="lightbox-next-btn"
+              aria-label="Siguiente foto"
+              title="Siguiente foto (→)"
+            >
+              ›
+            </button>
+          </div>
+        </div>
+
+        <footer class="lightbox-dialog__footer">
+          <span class="lightbox-dialog__hint">
+            🔍 Seleccioná las fotos a la izquierda (Frente / Espalda / Detalles). Hacé clic en la imagen o en "Zoom" para ver a tamaño real.
+          </span>
+        </footer>
+      </div>
+    </dialog>
+
+    <!-- Punto de entrada de JavaScript con ES Modules -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

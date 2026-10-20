@@ -1,0 +1,443 @@
+/* ==========================================================================
+   MÓDULO 2: ESTRUCTURA PRINCIPAL — NAVBAR & HERO (layout.css)
+   --------------------------------------------------------------------------
+   Aquí aprendemos a combinar los dos motores de diseño de CSS moderno:
+   1. Flexbox (`display: flex`): Ideal para alinear elementos en UNA dimensión
+      (como la barra de navegación horizontal o filas de botones).
+   2. CSS Grid (`display: grid`): Ideal para maquetar en DOS dimensiones
+      (filas y columnas, como la portada dividida en texto + vitrina visual).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. BARRA DE NAVEGACIÓN FIJA (Sticky + Glassmorphism)
+   --------------------------------------------------------------------------
+   - position: sticky + top: 0 mantiene el menú pegado arriba al hacer scroll.
+   - backdrop-filter: blur(14px) desenfoca lo que pasa por detrás del menú,
+     creando el efecto de "vidrio esmerilado" (Glassmorphism). */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-height);
+  background-color: rgba(10, 10, 12, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.navbar {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+/* Logotipo de BAD LUCK con ícono del gato a la izquierda */
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  color: var(--color-text-bright);
+  line-height: 1;
+}
+
+.brand-logo__icon {
+  height: 70px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.brand-logo__tag {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.06em;
+}
+
+/* Enlaces centrales de navegación */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  position: relative;
+  padding-block: 0.25rem;
+}
+
+/* Línea inferior animada al pasar el mouse (usando el pseudo-elemento ::after) */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--transition-normal);
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: var(--color-text-bright);
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Botón disparador del Carrito (sin borde duro) */
+.cart-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 0.55rem 1.05rem;
+  background-color: var(--color-surface);
+  border: none;
+  border-radius: var(--radius-pill);
+  color: var(--color-text-bright);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.cart-trigger:hover {
+  background-color: var(--color-surface-hover);
+  transform: translateY(-1px);
+}
+
+.cart-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  padding-inline: 0.35rem;
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   2. PORTADA PRINCIPAL (HERO SECTION — Escenario Rock & Roll a la derecha)
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  min-height: clamp(500px, 78dvh, 700px);
+  background-color: var(--color-bg);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.hero-canvas {
+  min-height: clamp(500px, 78dvh, 700px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 3.5vw, 3.25rem);
+  padding-block: var(--space-xl);
+}
+
+/* Bloque tipográfico BAD / LUCK + Rockwear & Lifestyle (a la derecha del gato) */
+.hero-brand-stage {
+  display: flex;
+  align-items: center;
+}
+
+.hero-type-block {
+  display: inline-flex;
+  flex-direction: column;
+  width: fit-content;
+  user-select: none;
+  cursor: default;
+}
+
+/* Texto BAD (arriba) y LUCK (debajo) encuadrados al mismo ancho */
+.hero-stacked-title {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-synthesis: none;
+  font-size: clamp(5rem, 10.5vw, 9.6rem);
+  line-height: 0.84;
+  letter-spacing: 0.01em;
+}
+
+.hero-word {
+  display: block;
+  width: 100%;
+}
+
+/* Como "BAD" tiene 3 letras y "LUCK" tiene 4, escalamos BAD (~1.275x) y
+   usamos flex space-between para clavar el borde derecho de la D con la K */
+.hero-word--bad {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 1.275em;
+  line-height: 0.82;
+}
+
+.hero-word--luck {
+  color: var(--color-accent);
+  line-height: 0.86;
+}
+
+/* Subtítulo "Rockwear & Lifestyle" con la fuente de subtítulos (--font-sans)
+   distribuido exactamente al 100% del ancho de BAD LUCK */
+.hero-subtitle {
+  width: 100%;
+  max-width: none;
+  margin-top: clamp(0.55rem, 1.1vw, 0.95rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: clamp(0.95rem, 1.85vw, 1.65rem);
+  line-height: 1;
+  color: var(--color-accent);
+}
+
+.hero-subtitle__space {
+  padding-inline: 0.35em;
+}
+
+/* Izquierda: Gato superpuesto (Logo 6 sin cuchillo -> Logo 1 con cuchillo) */
+.hero-cat-stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-cat-swap {
+  display: grid;
+  align-items: end;
+  justify-items: center;
+  width: clamp(240px, 28vw, 370px);
+  aspect-ratio: 1 / 1;
+}
+
+.hero-cat-img {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  display: block;
+  pointer-events: none;
+}
+
+/* Como el Logo 1 incluye el brazo y el cuchillo arriba (~24% de la altura total),
+   ajustamos el gato sin cuchillo (Logo 6) al 85% apoyado en la misma base
+   para que el cuerpo de ambos gatos tenga exactamente el mismo tamaño visual */
+.hero-cat-img--6 {
+  width: 85%;
+  height: 85%;
+}
+
+/* --------------------------------------------------------------------------
+   4. RESPONSIVE DESIGN (Adaptación a Tablets y Celulares)
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero-canvas {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   MÓDULO 6: CÓMO TRABAJAMOS & FOOTER (layout.css)
+   ========================================================================== */
+
+.nav-links {
+  scroll-target-group: auto;
+}
+
+.nav-links a:is(:target-current, .\:target-current) {
+  color: var(--color-accent);
+}
+
+.nav-links a:is(:target-current, .\:target-current)::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.process-section,
+.site-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 480px;
+}
+
+/* --------------------------------------------------------------------------
+   SECCIÓN "CÓMO TRABAJAMOS" (3 Pasos sin bordes rígidos)
+   -------------------------------------------------------------------------- */
+.process-section {
+  padding-block: var(--space-3xl);
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+.step-card {
+  position: relative;
+  background-color: var(--color-surface);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: grid;
+  gap: var(--space-sm);
+  box-shadow: 0 8px 24px -10px rgba(0, 0, 0, 0.5);
+  transition:
+    background-color var(--transition-normal),
+    transform var(--transition-normal);
+}
+
+.step-card:hover {
+  background-color: var(--color-surface-hover);
+  transform: translateY(-4px);
+}
+
+.step-number {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  line-height: 1;
+  color: var(--color-accent);
+  opacity: 0.85;
+}
+
+.step-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-size: 1.7rem;
+  letter-spacing: 0.04em;
+  color: var(--color-text-bright);
+}
+
+/* --------------------------------------------------------------------------
+   PIE DE PÁGINA (FOOTER) & BOTÓN FLOTANTE DE WHATSAPP
+   -------------------------------------------------------------------------- */
+.site-footer {
+  padding-block: var(--space-2xl);
+  background-color: #060608;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: auto 1.4fr 1fr 1fr;
+  align-items: center;
+  gap: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+.footer-cat-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-cat-img {
+  height: 115px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.footer-col h3 {
+  font-size: 1.35rem;
+  margin-bottom: var(--space-2xs);
+  color: var(--color-accent);
+}
+
+.footer-col a {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.footer-col a:hover {
+  color: var(--color-text-bright);
+}
+
+.footer-bottom {
+  padding-top: var(--space-lg);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* Botón flotante de consulta rápida por WhatsApp */
+.whatsapp-fab {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1.15rem;
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
+  border: 1px solid var(--color-accent-pure);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  box-shadow: var(--shadow-card);
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.whatsapp-fab:hover {
+  background-color: var(--color-accent-pure);
+  transform: translateY(-3px);
+}
+
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}

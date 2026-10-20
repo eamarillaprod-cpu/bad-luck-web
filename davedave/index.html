@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>DAVEDAVE // Panel de Control BAD LUCK</title>
+    <link rel="icon" type="image/png" href="/images/navbar-cat.png" />
+
+    <link
+      rel="preload"
+      href="/fonts/badluck.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ====================================================================
+         1. PANTALLA DE BLOQUEO CON CLAVE SECRETA (#auth-screen)
+         ==================================================================== -->
+    <main id="auth-screen" class="auth-screen">
+      <div class="auth-card">
+        <span class="badge">Acceso Restringido • /davedave</span>
+        <h1 class="auth-title">
+          BAD LUCK <span style="color: var(--color-accent);">STUDIO</span>
+        </h1>
+        <p style="font-size: var(--text-xs);">
+          Ingresá la clave de administrador para gestionar prendas, colecciones y precios de la tienda.
+        </p>
+
+        <form id="auth-form" class="auth-form">
+          <div class="field-group">
+            <label for="admin-pin-input" class="field-label">
+              Clave de acceso
+            </label>
+            <input
+              type="password"
+              id="admin-pin-input"
+              class="text-input"
+              placeholder="••••••••••"
+              autocomplete="current-password"
+              required
+            />
+            <span id="auth-error" class="auth-error" hidden>
+              Clave incorrecta. Intentá de nuevo.
+            </span>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            Entrar al Panel ↗
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          <a href="/">← Volver a la tienda pública</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- ====================================================================
+         2. DASHBOARD DE ADMINISTRACIÓN (#admin-dashboard)
+         ==================================================================== -->
+    <div id="admin-dashboard" class="admin-dashboard" hidden>
+      <header class="admin-header">
+        <div class="container admin-header__inner">
+          <div style="display: flex; align-items: center; gap: var(--space-md);">
+            <a href="/" class="brand-logo">
+              <img
+                src="/images/navbar-cat.png"
+                alt="Logo gato BAD LUCK"
+                class="brand-logo__icon"
+                width="38"
+                height="38"
+                decoding="async"
+              />
+              <span>BAD LUCK</span>
+              <span class="brand-logo__tag">DAVEDAVE</span>
+            </a>
+          </div>
+
+          <!-- Métricas en tiempo real -->
+          <div class="admin-kpis" aria-label="Resumen del catálogo">
+            <div class="kpi-pill">
+              <span>Prendas:</span>
+              <strong id="kpi-total-products">0</strong>
+            </div>
+            <div class="kpi-pill">
+              <span>En Stock:</span>
+              <strong id="kpi-in-stock">0</strong>
+            </div>
+            <div class="kpi-pill">
+              <span>Colecciones:</span>
+              <strong id="kpi-total-categories">0</strong>
+            </div>
+          </div>
+
+          <div class="admin-header__actions">
+            <a href="/" target="_blank" class="btn btn-outline btn-sm">
+              Ver Tienda en Vivo ↗
+            </a>
+            <button type="button" id="logout-btn" class="btn btn-outline btn-sm">
+              Salir
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="container admin-main">
+        <!-- Barra de Pestañas (Tabs) -->
+        <div class="admin-tabs" role="tablist" aria-label="Secciones de administración">
+          <button
+            type="button"
+            class="admin-tab"
+            role="tab"
+            aria-selected="true"
+            aria-controls="panel-products"
+            id="tab-btn-products"
+            data-tab="products"
+          >
+            1. Prendas &amp; Fotos
+          </button>
+          <button
+            type="button"
+            class="admin-tab"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-categories"
+            id="tab-btn-categories"
+            data-tab="categories"
+          >
+            2. Colecciones / Drops
+          </button>
+          <button
+            type="button"
+            class="admin-tab"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-settings"
+            id="tab-btn-settings"
+            data-tab="settings"
+          >
+            3. Precios Globales &amp; Respaldo
+          </button>
+        </div>
+
+        <!-- ================================================================
+             PESTAÑA 1: GESTIÓN DE PRENDAS (Se completa en Módulo 9)
+             ================================================================ -->
+        <section
+          id="panel-products"
+          class="admin-panel"
+          role="tabpanel"
+          aria-labelledby="tab-btn-products"
+        >
+          <div class="panel-toolbar">
+            <search class="toolbar-filters">
+              <input
+                type="search"
+                id="admin-search-input"
+                class="text-input"
+                placeholder="Buscar prenda por nombre o descripción..."
+                aria-label="Buscar prenda"
+              />
+              <select
+                id="admin-category-filter"
+                class="text-input"
+                aria-label="Filtrar por colección"
+              >
+                <option value="todos">Todas las colecciones</option>
+              </select>
+            </search>
+
+            <button type="button" id="new-product-btn" class="btn btn-primary">
+              + Subir Nueva Prenda
+            </button>
+          </div>
+
+          <div id="admin-products-list" class="admin-products-grid"></div>
+        </section>
+
+        <!-- ================================================================
+             PESTAÑA 2: GESTIÓN DE COLECCIONES (Se completa en Módulo 10)
+             ================================================================ -->
+        <section
+          id="panel-categories"
+          class="admin-panel"
+          role="tabpanel"
+          aria-labelledby="tab-btn-categories"
+          hidden
+        >
+          <div class="admin-split-grid">
+            <form id="category-form" class="admin-card">
+              <h2 class="admin-card__title">Nueva Colección / Categoría</h2>
+              <p style="font-size: var(--text-xs);">
+                Las colecciones aparecen como botones de filtro en el catálogo de la tienda (ej: <em>Bandas &amp; Rock</em>, <em>Anime</em>, <em>Festivales</em>).
+              </p>
+              <input type="hidden" id="category-id-input" name="id" />
+              <div class="field-group">
+                <label for="category-label-input" class="field-label">
+                  Nombre de la Colección *
+                </label>
+                <input
+                  type="text"
+                  id="category-label-input"
+                  name="label"
+                  class="text-input"
+                  placeholder="Ej: Metal Nacional / Anime Drops"
+                  required
+                />
+              </div>
+              <div style="display: flex; gap: var(--space-xs);">
+                <button type="submit" id="category-submit-btn" class="btn btn-primary">
+                  + Guardar Colección
+                </button>
+                <button
+                  type="button"
+                  id="category-cancel-btn"
+                  class="btn btn-outline"
+                  hidden
+                >
+                  Cancelar edición
+                </button>
+              </div>
+            </form>
+
+            <div class="admin-card">
+              <h2 class="admin-card__title">Colecciones Activas</h2>
+              <div id="admin-categories-list" class="categories-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             PESTAÑA 3: PRECIOS GLOBALES & RESPALDO (Se completa en Módulo 10)
+             ================================================================ -->
+        <section
+          id="panel-settings"
+          class="admin-panel"
+          role="tabpanel"
+          aria-labelledby="tab-btn-settings"
+          hidden
+        >
+          <div class="admin-split-grid">
+            <form id="settings-form" class="admin-card">
+              <h2 class="admin-card__title">
+                Precios de "Tu Idea en Tela" &amp; WhatsApp
+              </h2>
+              <p style="font-size: var(--text-xs);">
+                Estos valores actualizan el configurador de pedidos personalizados y el número de recepción de pedidos.
+              </p>
+
+              <div class="form-row-2">
+                <div class="field-group">
+                  <label for="price-oversize" class="field-label">
+                    Remera Oversize (Gs.)
+                  </label>
+                  <input
+                    type="number"
+                    id="price-oversize"
+                    name="remera-oversize"
+                    class="text-input"
+                    step="1000"
+                    min="10000"
+                    required
+                  />
+                </div>
+
+                <div class="field-group">
+                  <label for="price-clasica" class="field-label">
+                    Remera Clásica (Gs.)
+                  </label>
+                  <input
+                    type="number"
+                    id="price-clasica"
+                    name="remera-clasica"
+                    class="text-input"
+                    step="1000"
+                    min="10000"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="field-group">
+                  <label for="price-hoodie" class="field-label">
+                    Hoodie Canguro (Gs.)
+                  </label>
+                  <input
+                    type="number"
+                    id="price-hoodie"
+                    name="hoodie-canguro"
+                    class="text-input"
+                    step="1000"
+                    min="10000"
+                    required
+                  />
+                </div>
+
+                <div class="field-group">
+                  <label for="price-double-zone" class="field-label">
+                    Extra Frente + Espalda (Gs.)
+                  </label>
+                  <input
+                    type="number"
+                    id="price-double-zone"
+                    name="zoneDoubleExtra"
+                    class="text-input"
+                    step="1000"
+                    min="0"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="field-group">
+                  <label for="price-xxl" class="field-label">
+                    Extra Talle XXL (Gs.)
+                  </label>
+                  <input
+                    type="number"
+                    id="price-xxl"
+                    name="sizeXxlExtra"
+                    class="text-input"
+                    step="1000"
+                    min="0"
+                    required
+                  />
+                </div>
+
+                <div class="field-group">
+                  <label for="setting-whatsapp" class="field-label">
+                    WhatsApp de Pedidos (con código 595)
+                  </label>
+                  <input
+                    type="text"
+                    id="setting-whatsapp"
+                    name="whatsappNumber"
+                    class="text-input"
+                    placeholder="595971903651"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="field-group">
+                  <label for="setting-pin" class="field-label">
+                    Clave de acceso a /davedave
+                  </label>
+                  <input
+                    type="text"
+                    id="setting-pin"
+                    name="adminPin"
+                    class="text-input"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- Sección de Calidades de Prenda (Básica / Premium / Custom) -->
+              <div class="settings-divider" style="border-top: 1px dashed rgba(255, 255, 255, 0.12); margin-top: var(--space-md); padding-top: var(--space-md);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                  <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.04em; color: var(--color-text-bright); margin: 0;">
+                    Calidades de Prenda (Básica / Premium)
+                  </h3>
+                  <span class="stock-badge in-stock">Catálogo &amp; Customizer</span>
+                </div>
+                <p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-md);">
+                  Personalizá los nombres de las calidades, sus descripciones y el precio extra agregado (+Gs.). Se reflejan en vivo en el catálogo de drops y en "Tu Idea en Tela".
+                </p>
+
+                <div id="qualities-settings-list" style="display: grid; gap: var(--space-sm);">
+                  <!-- Filas dinámicas generadas en admin.js -->
+                </div>
+
+                <div style="margin-top: var(--space-sm); margin-bottom: var(--space-md);">
+                  <button type="button" id="add-quality-btn" class="btn btn-outline" style="font-size: 0.76rem; padding: 0.4rem 0.85rem;">
+                    + Agregar otra calidad
+                  </button>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary">
+                Guardar Configuración Global
+              </button>
+            </form>
+
+            <div class="admin-card">
+              <h2 class="admin-card__title">Respaldo y Restauración</h2>
+              <p style="font-size: var(--text-xs);">
+                Podés descargar una copia de seguridad de todas tus prendas, fotos y precios en un archivo <code>.json</code> o restaurar los valores iniciales.
+              </p>
+
+              <div style="display: grid; gap: var(--space-sm); margin-top: var(--space-xs);">
+                <button type="button" id="export-json-btn" class="btn btn-outline">
+                  ⬇ Descargar Respaldo (.json)
+                </button>
+
+                <label class="btn btn-outline" style="cursor: pointer;">
+                  ⬆ Importar Respaldo (.json)
+                  <input
+                    type="file"
+                    id="import-json-input"
+                    accept="application/json"
+                    hidden
+                  />
+                </label>
+
+                <button
+                  type="button"
+                  id="reset-defaults-btn"
+                  class="btn btn-danger-outline"
+                >
+                  ↺ Restaurar Catálogo de Fábrica
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- ====================================================================
+         3. MODAL PARA SUBIR / EDITAR PRENDA (<dialog> • Módulo 9)
+         ==================================================================== -->
+    <dialog
+      id="product-modal"
+      class="product-modal"
+      closedby="any"
+      aria-labelledby="product-modal-title"
+    >
+      <form id="product-form">
+        <div class="product-modal__header">
+          <h2 id="product-modal-title" class="cart-drawer__title">
+            Subir Nueva Prenda
+          </h2>
+          <button
+            type="button"
+            id="close-product-modal-btn"
+            class="cart-close-btn"
+            aria-label="Cerrar modal"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="product-modal__body">
+          <input type="hidden" id="prod-id" name="id" />
+
+          <!-- Subida de Fotos Reales (Frente, Espalda, Detalles • Máximo 5 fotos) -->
+          <div class="field-group">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.35rem;">
+              <span class="field-label" style="margin: 0;">
+                <span>Fotos de la Prenda (Frente, Espalda, etc.)</span>
+                <span class="field-hint">Hasta 5 fotos • Se comprimen a WebP</span>
+              </span>
+              <span id="photo-counter-badge" class="badge" style="font-size: 0.68rem; padding: 0.15rem 0.5rem;">
+                0 / 5 fotos
+              </span>
+            </div>
+
+            <!-- Grilla dinámica de fotos subidas (1 a 5) -->
+            <div id="photos-grid-list" class="photos-grid-list">
+              <!-- Renderizado dinámicamente en admin.js -->
+            </div>
+
+            <div class="photo-uploader__controls" style="margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+              <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <label id="upload-photo-label" class="btn btn-outline btn-sm" style="cursor: pointer;">
+                  📷 Elegir Fotos (PC o Celular)
+                  <input
+                    type="file"
+                    id="prod-photo-file"
+                    accept="image/*"
+                    multiple
+                    hidden
+                  />
+                </label>
+                <button
+                  type="button"
+                  id="clear-photo-btn"
+                  class="remove-item-btn"
+                  style="font-size: 0.72rem; padding: 0.35rem 0.6rem;"
+                >
+                  ✕ Quitar todas
+                </button>
+              </div>
+
+              <div style="display: flex; gap: 0.4rem;">
+                <input
+                  type="url"
+                  id="prod-photo-url"
+                  class="text-input"
+                  placeholder="O pegá URL directa (https://...) y tocá +"
+                  style="padding: 0.45rem 0.75rem; font-size: var(--text-xs);"
+                />
+                <button
+                  type="button"
+                  id="add-photo-url-btn"
+                  class="btn btn-outline btn-sm"
+                  style="white-space: nowrap;"
+                >
+                  + Agregar URL
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="field-group">
+              <label for="prod-name" class="field-label">Nombre de la Prenda *</label>
+              <input
+                type="text"
+                id="prod-name"
+                name="name"
+                class="text-input"
+                placeholder="Ej: Remera Deftones White Pony"
+                required
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="prod-category" class="field-label">Colección *</label>
+              <select id="prod-category" name="category" class="text-input" required></select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="field-group">
+              <label for="prod-price" class="field-label">Precio Base Clásico (Gs.) *</label>
+              <input
+                type="number"
+                id="prod-price"
+                name="basePrice"
+                class="text-input"
+                step="1000"
+                min="5000"
+                value="80000"
+                required
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="prod-oversize-extra" class="field-label">Extra Corte Oversize (Gs.)</label>
+              <input
+                type="number"
+                id="prod-oversize-extra"
+                name="oversizeExtra"
+                class="text-input"
+                step="1000"
+                min="0"
+                value="15000"
+              />
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="field-group">
+              <label for="prod-badge" class="field-label">Insignia / Etiqueta</label>
+              <input
+                type="text"
+                id="prod-badge"
+                name="badge"
+                class="text-input"
+                placeholder="Ej: Nuevo Drop / Más Pedido"
+                value="Nuevo Drop"
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="prod-garment-type" class="field-label">Silueta Base (si no hay foto)</label>
+              <select id="prod-garment-type" name="garmentType" class="text-input">
+                <option value="tshirt">Remera</option>
+                <option value="hoodie">Buzo / Hoodie Canguro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="prod-desc" class="field-label">Descripción de la Prenda *</label>
+            <textarea
+              id="prod-desc"
+              name="description"
+              class="text-area"
+              placeholder="Detalles de la tela, estampado, inspiración..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-row-2">
+            <fieldset class="field-group">
+              <legend class="field-label">Talles Disponibles</legend>
+              <div class="option-pills" id="prod-sizes-group">
+                <label class="option-pill"><input type="checkbox" name="sizes" value="S" checked /><span>S</span></label>
+                <label class="option-pill"><input type="checkbox" name="sizes" value="M" checked /><span>M</span></label>
+                <label class="option-pill"><input type="checkbox" name="sizes" value="L" checked /><span>L</span></label>
+                <label class="option-pill"><input type="checkbox" name="sizes" value="XL" checked /><span>XL</span></label>
+                <label class="option-pill"><input type="checkbox" name="sizes" value="XXL" checked /><span>XXL</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="field-group">
+              <legend class="field-label">Estado de Stock</legend>
+              <div class="option-pills">
+                <label class="option-pill">
+                  <input type="radio" name="inStock" value="true" checked />
+                  <span>En Stock</span>
+                </label>
+                <label class="option-pill">
+                  <input type="radio" name="inStock" value="false" />
+                  <span>Agotado</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+
+        <div class="product-modal__footer">
+          <button type="button" id="cancel-product-modal-btn" class="btn btn-outline btn-sm">
+            Cancelar
+          </button>
+          <button type="submit" class="btn btn-primary btn-sm">
+            Guardar Prenda
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Notificación flotante (Toast) -->
+    <div id="admin-toast" class="admin-toast" role="status" aria-live="polite" hidden></div>
+
+    <script type="module" src="/src/davedave/admin.js"></script>
+  </body>
+</html>

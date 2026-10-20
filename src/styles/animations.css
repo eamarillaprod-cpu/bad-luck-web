@@ -1,0 +1,262 @@
+/* ==========================================================================
+   MÓDULO 2: ANIMACIONES CSS A 60 FPS (animations.css)
+   --------------------------------------------------------------------------
+   Regla de oro del rendimiento web:
+   Siempre que animes elementos en CSS, usa `transform` (translate, scale, rotate)
+   y `opacity`. Estas dos propiedades se procesan directamente en la tarjeta
+   gráfica (GPU / Compositor Thread) sin recalcular el diseño de la página.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CINTA INFINITA STREETWEAR (MARQUEE)
+   --------------------------------------------------------------------------
+   ¿Cómo funciona el truco del Marquee infinito sin JavaScript?
+   Colocamos dos bloques idénticos de texto uno al lado del otro dentro de
+   `.marquee-track`. Cuando la pista se desplaza exactamente -50% hacia la
+   izquierda (`translateX(-50%)`), el segundo bloque queda en el lugar exacto
+   donde empezó el primero, y el ciclo reinicia sin que el ojo note el salto. */
+.marquee {
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
+  border-bottom: 1px solid var(--color-border);
+  overflow: hidden;
+  padding-block: 0.65rem;
+  user-select: none;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 26s linear infinite;
+}
+
+/* Pausar suavemente si el usuario apoya el mouse encima para leer */
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding-right: var(--space-lg);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.marquee-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-text-inverse);
+  border-radius: 50%;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. ANIMACIÓN SINCRONIZADA DEL HERO (SIN GLOW):
+      "BAD" (Luz que falla) + Gato Logo 6 (sin cuchillo) -> Logo 1 (con cuchillo)
+   --------------------------------------------------------------------------
+   - Cuando "BAD" está oculto/apagado -> a la derecha se ve el Logo 6 (gato solo).
+   - Cuando "BAD" parpadea y se revela -> el gato cambia exactamente en los
+     mismos milisegundos al Logo 1 (aparece el brazo con el cuchillo).
+   - Sin efectos de resplandor (glow), manteniendo el color plano #DCDDD0. */
+
+.hero-word--bad {
+  color: var(--color-accent);
+  opacity: 0.04;
+  animation: bad-light-fault 5.6s infinite;
+}
+
+.hero-cat-img--6 {
+  opacity: 1;
+  animation: cat-logo-6-sync 5.6s infinite;
+}
+
+.hero-cat-img--1 {
+  opacity: 0;
+  animation: cat-logo-1-sync 5.6s infinite;
+}
+
+/* Al pasar el mouse por el Hero, mantiene "BAD" y el gato con cuchillo visibles */
+.hero-canvas:hover .hero-word--bad {
+  animation: none;
+  opacity: 1;
+}
+
+.hero-canvas:hover .hero-cat-img--6 {
+  animation: none;
+  opacity: 0;
+}
+
+.hero-canvas:hover .hero-cat-img--1 {
+  animation: none;
+  opacity: 1;
+}
+
+@keyframes bad-light-fault {
+  /* Fase 1: "BAD" oculto (solo se ve LUCK + Gato 6 sin cuchillo) */
+  0%, 35% {
+    opacity: 0.04;
+  }
+  /* Parpadeo de luz que falla */
+  36% {
+    opacity: 0.95;
+  }
+  38% {
+    opacity: 0.06;
+  }
+  40% {
+    opacity: 0.7;
+  }
+  42% {
+    opacity: 0.06;
+  }
+  /* Fase 2: "BAD" revelado junto con el cuchillo del Gato 1 */
+  44%, 65% {
+    opacity: 1;
+  }
+  /* Breve parpadeo eléctrico intermedio */
+  66% {
+    opacity: 0.25;
+  }
+  68%, 84% {
+    opacity: 1;
+  }
+  /* Fase 3: La luz vuelve a fallar y se apaga */
+  86% {
+    opacity: 0.08;
+  }
+  88% {
+    opacity: 0.75;
+  }
+  90%, 100% {
+    opacity: 0.04;
+  }
+}
+
+@keyframes cat-logo-6-sync {
+  0%, 35% {
+    opacity: 1;
+  }
+  36% {
+    opacity: 0;
+  }
+  38% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  42% {
+    opacity: 1;
+  }
+  44%, 65% {
+    opacity: 0;
+  }
+  66% {
+    opacity: 1;
+  }
+  68%, 84% {
+    opacity: 0;
+  }
+  86% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 0;
+  }
+  90%, 100% {
+    opacity: 1;
+  }
+}
+
+@keyframes cat-logo-1-sync {
+  0%, 35% {
+    opacity: 0;
+  }
+  36% {
+    opacity: 1;
+  }
+  38% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  42% {
+    opacity: 0;
+  }
+  44%, 65% {
+    opacity: 1;
+  }
+  66% {
+    opacity: 0;
+  }
+  68%, 84% {
+    opacity: 1;
+  }
+  86% {
+    opacity: 0;
+  }
+  88% {
+    opacity: 1;
+  }
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. ACCESIBILIDAD: RESPETO POR PREFERS-REDUCED-MOTION
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .hero-word--bad,
+  .hero-cat-img--6,
+  .hero-cat-img--1 {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   MÓDULO 6: ANIMACIONES DE REVELADO AL HACER SCROLL (IntersectionObserver)
+   --------------------------------------------------------------------------
+   Los elementos con `.reveal-on-scroll` comienzan ligeramente desplazados
+   hacia abajo (`translateY(28px)`) y transparentes (`opacity: 0`).
+   Cuando entran en la pantalla del usuario, JavaScript les agrega la clase
+   `.is-visible` y se deslizan suavemente a su lugar.
+   ========================================================================== */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 650ms var(--ease-out-expo),
+    transform 650ms var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

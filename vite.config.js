@@ -10,6 +10,7 @@ import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  base: '/bad-luck-web/',
   appType: 'mpa',
   server: {
     port: 5173,

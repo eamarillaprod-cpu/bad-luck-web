@@ -20,6 +20,15 @@ import { getSettings, subscribeToStore } from '../data/store.js';
 const CANVAS_W = 768;
 const CANVAS_H = 1024;
 
+const BASE_URL = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+const resolveAssetUrl = (url) => {
+  if (!url) return url;
+  if (/^https?:\/\//i.test(url) || url.startsWith('data:') || url.startsWith('blob:')) return url;
+  const cleanPath = url.startsWith('/') ? url : `/${url}`;
+  if (BASE_URL && (cleanPath === BASE_URL || cleanPath.startsWith(`${BASE_URL}/`))) return cleanPath;
+  return `${BASE_URL}${cleanPath}`;
+};
+
 /**
  * Mapa de las 12 imágenes de remeras generadas (2 cortes × 3 colores × Frente/Espalda).
  */
@@ -31,20 +40,20 @@ const GARMENT_META = {
     printBaseWidth: 225,
     colors: {
       'Negro Carbón': {
-        src: '/images/oversize-negro.jpg',
-        backSrc: '/images/oversize-negro-espalda.jpg',
+        src: resolveAssetUrl('/images/oversize-negro.jpg'),
+        backSrc: resolveAssetUrl('/images/oversize-negro-espalda.jpg'),
         isDark: true,
         refLum: 42,
       },
       'Blanco Hueso': {
-        src: '/images/oversize-blanco.jpg',
-        backSrc: '/images/oversize-blanco-espalda.jpg',
+        src: resolveAssetUrl('/images/oversize-blanco.jpg'),
+        backSrc: resolveAssetUrl('/images/oversize-blanco-espalda.jpg'),
         isDark: false,
         refLum: 205,
       },
       'Gris Vintage': {
-        src: '/images/oversize-gris.jpg',
-        backSrc: '/images/oversize-gris-espalda.jpg',
+        src: resolveAssetUrl('/images/oversize-gris.jpg'),
+        backSrc: resolveAssetUrl('/images/oversize-gris-espalda.jpg'),
         isDark: true,
         refLum: 105,
       },
@@ -57,20 +66,20 @@ const GARMENT_META = {
     printBaseWidth: 205,
     colors: {
       'Negro Carbón': {
-        src: '/images/clasica-negro.jpg',
-        backSrc: '/images/clasica-negro-espalda.jpg',
+        src: resolveAssetUrl('/images/clasica-negro.jpg'),
+        backSrc: resolveAssetUrl('/images/clasica-negro-espalda.jpg'),
         isDark: true,
         refLum: 42,
       },
       'Blanco Hueso': {
-        src: '/images/clasica-blanco.jpg',
-        backSrc: '/images/clasica-blanco-espalda.jpg',
+        src: resolveAssetUrl('/images/clasica-blanco.jpg'),
+        backSrc: resolveAssetUrl('/images/clasica-blanco-espalda.jpg'),
         isDark: false,
         refLum: 205,
       },
       'Gris Vintage': {
-        src: '/images/clasica-gris.jpg',
-        backSrc: '/images/clasica-gris-espalda.jpg',
+        src: resolveAssetUrl('/images/clasica-gris.jpg'),
+        backSrc: resolveAssetUrl('/images/clasica-gris-espalda.jpg'),
         isDark: true,
         refLum: 105,
       },
@@ -743,7 +752,7 @@ export function initCustomizer() {
 
   presetBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      const presetUrl = btn.dataset.preset;
+      const presetUrl = resolveAssetUrl(btn.dataset.preset);
       const presetName = btn.dataset.presetName || 'Diseño Bad Luck';
       const presetSide = btn.dataset.presetSide || 'front';
       if (presetUrl) {
